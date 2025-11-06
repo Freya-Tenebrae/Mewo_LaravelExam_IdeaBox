@@ -4,7 +4,7 @@ Ce repository contiens ma solution à l'examen Laravell de Mewo (promotion dev E
 
 ## Description 
 
-Cet examen a pour but de réaliser un site Laravel simple de "Boite à Idée"
+Cet examen à pour but de réaliser un site Laravel simple de "Boite à Idée"
 
 ## Instalation
 
