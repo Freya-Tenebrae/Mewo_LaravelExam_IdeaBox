@@ -15,7 +15,16 @@
         <a href="{{ route('ideas.create') }}" class="btn btn-primary">Proposer une idée</a>
     </div>
     <hr>
-    <h2 class="mb-3">Mes idées</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Mes idées</h2>
+        <form action="{{ route('ideas.index') }}" method="GET" class="d-flex" role="search">
+            <input type="search" name="search" class="form-control form-control-sm me-2" placeholder="Rechercher une idée par titre..." value="{{ $searchTerm ?? '' }}">
+            <button class="btn btn-outline-primary btn-sm" @error('search') is-invalid @enderror type="submit">Rechercher</button>
+            @error('search')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </form>
+    </div>
     @forelse ($ideas as $idea)
         <div class="card mb-3">
             <div class="card-body">

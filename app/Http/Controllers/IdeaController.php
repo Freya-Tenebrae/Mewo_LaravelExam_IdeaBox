@@ -10,16 +10,28 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class IdeaController extends Controller
 {
     use AuthorizesRequests;
-    
-    public function dashboard()
-    {
-        return $this->index();
-    }
 
-    public function index()
+    public function index(Request $request)
     {
-        $ideas = Auth::user()->ideas()->latest()->get();
-        return view('idea.dashboard', compact('ideas'));
+        $query = Auth::user()->ideas();
+
+        if ($request != null && $request->has('search') && $request->input('search') != '')
+        {
+            $searchTerm = $request->input('search');
+            $query->where('title', 'like', "%{$searchTerm}%");
+            $query->orWhere('description', 'like', "%{$searchTerm}%");
+
+            return view('idea.dashboard', [
+                'ideas' => $query->latest()->get(),
+                'searchTerm' => $searchTerm
+            ]);
+        }
+        else 
+        {
+            return view('idea.dashboard', [
+                'ideas' => $query->latest()->get(),
+            ]);
+        }
     }
 
     public function create()

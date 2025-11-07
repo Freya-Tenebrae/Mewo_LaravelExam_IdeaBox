@@ -31,9 +31,9 @@ Route::post('/deconnexion', [
 
 Route::middleware(['auth'])->group(function (){
 
-    Route::get('/dashboard',[
-        IdeaController::class, 'dashboard'
-    ])->name('dashboard');
-
     Route::resource('ideas', IdeaController::class);
+
+    Route::get('/dashboard', function () {
+        return redirect()->route('ideas.index');
+    })->name('dashboard');
 });
