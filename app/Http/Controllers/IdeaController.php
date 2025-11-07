@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Idea;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class IdeaController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function dashboard()
     {
         return $this->index();
@@ -45,6 +48,8 @@ class IdeaController extends Controller
     public function show(string $id)
     {
         $idea = Idea::findOrFail($id);
+        $this->authorize('view', $idea);
+
         return view('idea.show', compact('idea'));
     }
 
@@ -54,6 +59,8 @@ class IdeaController extends Controller
     public function edit(string $id)
     {
         $idea = Idea::findOrFail($id);
+        $this->authorize('update', $idea);
+
         return view('idea.edit', compact('idea'));
     }
 
@@ -77,6 +84,8 @@ class IdeaController extends Controller
     public function destroy(string $id)
     {
         $idea = Idea::findOrFail($id);
+        $this->authorize('delete', $idea);
+
         $idea->delete();
         return redirect()->route('ideas.index')->with('success', 'Idea "' . $idea->title . '" deleted successfully.');
     }
