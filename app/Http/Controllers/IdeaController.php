@@ -73,11 +73,6 @@ class IdeaController extends Controller
         $idea = Idea::findOrFail($id);
         $this->authorize('update', $idea);
 
-        if ($idea->status != 'Submitted')
-        {
-            return redirect()->route('ideas.index')->with('error', 'The Idea "' . $idea->title . '" isn\'t submitted and cannot be edited.');
-        }
-
         return view('idea.edit', compact('idea'));
     }
 
@@ -102,11 +97,6 @@ class IdeaController extends Controller
     {
         $idea = Idea::findOrFail($id);
         $this->authorize('delete', $idea);
-
-        if ($idea->status != 'Submitted')
-        {
-            return redirect()->route('ideas.index')->with('error', 'The Idea "' . $idea->title . '" isn\'t submitted and cannot be deleted.');
-        }
 
         $idea->delete();
         return redirect()->route('ideas.index')->with('success', 'Idea "' . $idea->title . '" deleted successfully.');
