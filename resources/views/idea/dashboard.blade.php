@@ -18,11 +18,8 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Mes idées</h2>
         <form action="{{ route('ideas.index') }}" method="GET" class="d-flex" role="search">
-            <input type="search" name="search" class="form-control form-control-sm me-2" placeholder="Rechercher une idée par titre..." value="{{ $searchTerm ?? '' }}">
-            <button class="btn btn-outline-primary btn-sm" @error('search') is-invalid @enderror type="submit">Rechercher</button>
-            @error('search')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+            <input type="search" name="search" class="form-control form-control-sm me-2" placeholder="Rechercher une idée..." value="{{ $searchTerm ?? '' }}">
+            <button class="btn btn-outline-primary btn-sm" type="submit">Rechercher</button>
         </form>
     </div>
     @forelse ($ideas as $idea)

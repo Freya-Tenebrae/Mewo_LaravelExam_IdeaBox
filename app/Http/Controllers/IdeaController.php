@@ -18,8 +18,10 @@ class IdeaController extends Controller
         if ($request != null && $request->has('search') && $request->input('search') != '')
         {
             $searchTerm = $request->input('search');
-            $query->where('title', 'like', "%{$searchTerm}%");
-            $query->orWhere('description', 'like', "%{$searchTerm}%");
+            $query->where('title', 'like', "%{$searchTerm}%")
+                  ->orWhere('description', 'like', "%{$searchTerm}%");
+
+            $query->where('user_id', Auth::id());
 
             return view('idea.dashboard', [
                 'ideas' => $query->latest()->get(),
