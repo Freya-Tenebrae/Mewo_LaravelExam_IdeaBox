@@ -14,7 +14,22 @@ rel="stylesheet">
             <a class="navbar-brand" href="/">Idea Box</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    
+                    @auth
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-link nav-link">Déconnexion</button>
+                        </form>
+                    </li>
+                    @endauth
+                    @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login')}}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register')}}">Inscription</a>
+                    </li>
+                    @endguest
                 </ul>
             </div>
         </div>
