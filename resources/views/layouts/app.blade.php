@@ -11,10 +11,13 @@ rel="stylesheet">
 <body> 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="/">Boite à Idées</a>
+            <a class="navbar-brand" href="/">Accueil</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">Boite à Idées</a>
+                    </li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

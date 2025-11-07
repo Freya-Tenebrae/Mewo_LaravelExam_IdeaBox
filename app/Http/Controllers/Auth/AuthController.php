@@ -32,8 +32,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended('/'); // todelete later and uncomment previous line
-        //return redirect()->intended('dashboard');
+        return redirect()->intended('dashboard');
     }
 
     public function showLoginForm()
@@ -51,8 +50,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials))
         {
             $request->session()->regenerate();
-            //return redirect()->intended('dashboard');
-            return redirect()->intended('/'); // todelete later and uncomment previous line
+            return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([

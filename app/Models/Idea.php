@@ -13,7 +13,7 @@ class Idea extends Model
     {
         return [
             'title' => $this->faker->sentence(),
-            'content' => $this->faker->paragraph(),
+            'description' => $this->faker->paragraph(),
             'user_id' => \App\Models\User::factory(),
         ];
     }
