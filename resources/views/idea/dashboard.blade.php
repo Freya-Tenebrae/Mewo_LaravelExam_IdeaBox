@@ -5,6 +5,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1>Boite à Idées</h1>
         <a href="{{ route('ideas.create') }}" class="btn btn-primary">Proposer une idée</a>
@@ -18,6 +23,7 @@
                     <div>
                         <h5 class="card-title">
                             <a href="{{ route('ideas.show', $idea) }}">{{ $idea->title }}</a>
+                            <p class="card-text"><small class="text-muted">{{ $idea->status }}</small></p>
                         </h5>
                         <p class="card-text">{{ $idea->description }}</p>
                     </div>
